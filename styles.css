@@ -1,0 +1,53 @@
+:root {
+  --bg: #f4f6f4; --card: #fff; --text: #1b1f1b; --muted: #6b756b; --line: #e1e6e1;
+  --green: #2e7d32; --green-soft: #e3f1e4; --amber: #f9a825; --red: #c62828;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111411; --card: #1b201b; --text: #eef2ee; --muted: #93a093; --line: #2c342c; --green: #5fb764; --green-soft: #1d2f1e; }
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.4 -apple-system, system-ui, sans-serif; }
+.top { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: calc(env(safe-area-inset-top) + 10px) 16px 8px; border-bottom: 1px solid var(--line); }
+h1 { margin: 0; font-size: 26px; }
+main { padding: 12px 16px calc(90px + env(safe-area-inset-bottom)); max-width: 640px; margin: 0 auto; }
+.tabs { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: var(--card); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+.tabs button { flex: 1; border: 0; background: none; padding: 8px 0 6px; font-size: 22px; color: var(--muted); display: flex; flex-direction: column; align-items: center; }
+.tabs button span { font-size: 11px; margin-top: 2px; }
+.tabs button.active { color: var(--green); font-weight: 600; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+input, select, textarea { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-size: 16px; }
+label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 4px; }
+.btn { border: 0; border-radius: 12px; padding: 13px 16px; background: var(--green); color: #fff; font-weight: 600; width: 100%; }
+.btn.secondary { background: var(--green-soft); color: var(--green); }
+.btn.danger { background: transparent; color: var(--red); border: 1px solid var(--red); }
+.btn + .btn { margin-top: 10px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row > * { flex: 1; }
+
+.cat { margin: 18px 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; width: 100%; text-align: left; display: block; }
+.item .line { display: flex; justify-content: space-between; gap: 8px; }
+.item .name { font-weight: 600; }
+.item .qty { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--green); }
+.bar i.low { background: var(--amber); }
+.bar i.out { background: var(--red); }
+.empty { text-align: center; color: var(--muted); padding: 40px 10px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px 14px 14px; margin-bottom: 14px; }
+.card h2 { font-size: 15px; margin: 14px 0 0; }
+.check { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); margin: 0; font-size: 16px; color: var(--text); }
+.check:last-child { border: 0; }
+.check input { width: 22px; height: 22px; }
+.chips { display: flex; gap: 6px; margin-top: 8px; }
+.chips button { flex: 1; padding: 9px 0; border-radius: 10px; border: 1px solid var(--line); background: var(--card); font-size: 14px; }
+.hint { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+textarea.preview { height: 220px; font: 12px/1.35 ui-monospace, Menlo, monospace; }
+
+dialog { border: 0; border-radius: 16px; padding: 18px; width: min(92vw, 420px); background: var(--card); color: var(--text); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h3 { margin: 0 0 4px; }
+#toast { position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); background: #222; color: #fff; padding: 10px 16px; border-radius: 20px; opacity: 0; pointer-events: none; transition: .25s; font-size: 14px; max-width: 90vw; z-index: 20; }
+#toast.show { opacity: 1; transform: translateX(-50%); }
+.fab { position: fixed; right: 18px; bottom: calc(76px + env(safe-area-inset-bottom)); width: 56px; height: 56px; border-radius: 28px; border: 0; background: var(--green); color: #fff; font-size: 30px; box-shadow: 0 4px 14px rgba(0,0,0,.3); z-index: 6; }

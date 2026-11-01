@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pantry Chef</title>
+  <meta name="theme-color" content="#2e7d32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Pantry Chef">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top"><h1 id="title">Pantry</h1></header>
+  <main id="view"></main>
+
+  <nav class="tabs">
+    <button data-tab="pantry" class="active">🥫<span>Pantry</span></button>
+    <button data-tab="recipe">🍳<span>Recipe</span></button>
+    <button data-tab="settings">⚙️<span>Settings</span></button>
+  </nav>
+
+  <dialog id="dlg"></dialog>
+  <div id="toast" role="status"></div>
+  <input type="file" id="file" accept=".json,application/json" hidden>
+
+  <script src="app.js"></script>
+</body>
+</html>
