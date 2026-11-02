@@ -134,11 +134,11 @@ function parseImport(text) {
   return { items, equipment: Array.isArray(data.equipment) ? data.equipment.map(String) : null, prefs: data.preferences && typeof data.preferences === 'object' ? data.preferences : null };
 }
 
-function applyImport(text, label) {
+function applyImport(text, label, ask = true) {
   try {
     const clean = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
     const imp = parseImport(clean);
-    if (!confirm(`Replace your current pantry (${state.items.length} items) with ${imp.items.length} items from ${label}?`)) return false;
+    if (ask && !confirm(`Replace your current pantry (${state.items.length} items) with ${imp.items.length} items from ${label}?`)) return false;
     state.items = imp.items;
     if (imp.equipment) state.equipment = imp.equipment;
     if (imp.prefs) state.prefs = { ...state.prefs, ...imp.prefs };
@@ -160,7 +160,7 @@ function openPasteDialog() {
   dlg.innerHTML = `
     <form method="dialog" id="pasteForm">
       <h3>Paste pantry JSON</h3>
-      <p class="hint">Replaces your whole pantry.</p>
+      <p class="hint">Replaces your whole pantry immediately.</p>
       <textarea id="paste-text" class="preview" placeholder='{"pantry": [...]}' autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
       <div style="margin-top:14px">
         <button class="btn" value="go">Import</button>
@@ -172,7 +172,7 @@ function openPasteDialog() {
     ev.preventDefault();
     const text = dlg.querySelector('#paste-text').value;
     if (!text.trim()) return;
-    if (applyImport(text, 'the pasted text')) dlg.close();
+    if (applyImport(text, 'the pasted text', false)) dlg.close();
   });
   dlg.showModal();
 }
@@ -358,5 +358,14 @@ function bind() {
 document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => { tab = b.dataset.tab; render(); window.scrollTo(0, 0); }));
 $('#file').addEventListener('change', (e) => { if (e.target.files[0]) handleFile(e.target.files[0]); });
 render();
+
+// First run only: load the bundled starter pantry automatically.
+(async () => {
+  try { if (localStorage.getItem(STORE_KEY) !== null) return; } catch (e) { return; }
+  try {
+    const r = await fetch('my-pantry.json');
+    if (r.ok && applyImport(await r.text(), 'my-pantry.json', false)) toast('Loaded your starter pantry');
+  } catch (e) { /* offline or missing: stay empty */ }
+})();
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
