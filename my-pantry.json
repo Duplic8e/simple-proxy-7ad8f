@@ -1,0 +1,192 @@
+{
+  "app": "pantry-chef",
+  "version": 1,
+  "pantry": [
+    {
+      "name": "Salt",
+      "category": "Spices & Herbs",
+      "current_grams": 750,
+      "max_grams": 750
+    },
+    {
+      "name": "Pepper",
+      "category": "Spices & Herbs",
+      "current_grams": 100,
+      "max_grams": 100
+    },
+    {
+      "name": "Cajun powder",
+      "category": "Spices & Herbs",
+      "current_grams": 70,
+      "max_grams": 70
+    },
+    {
+      "name": "Garlic powder",
+      "category": "Spices & Herbs",
+      "current_grams": 100,
+      "max_grams": 100
+    },
+    {
+      "name": "Chicken bouillon",
+      "category": "Spices & Herbs",
+      "current_grams": 200,
+      "max_grams": 200
+    },
+    {
+      "name": "Paprika",
+      "category": "Spices & Herbs",
+      "current_grams": 80,
+      "max_grams": 80
+    },
+    {
+      "name": "Seven spices",
+      "category": "Spices & Herbs",
+      "current_grams": 80,
+      "max_grams": 80
+    },
+    {
+      "name": "Mandi spices",
+      "category": "Spices & Herbs",
+      "current_grams": 100,
+      "max_grams": 100
+    },
+    {
+      "name": "Frozen fries",
+      "category": "Frozen",
+      "current_grams": 1500,
+      "max_grams": 1500
+    },
+    {
+      "name": "Xanthan gum",
+      "category": "Baking",
+      "current_grams": 50,
+      "max_grams": 50
+    },
+    {
+      "name": "Protein powder",
+      "category": "Baking",
+      "current_grams": 900,
+      "max_grams": 900
+    },
+    {
+      "name": "Protein pancake mix",
+      "category": "Baking",
+      "current_grams": 500,
+      "max_grams": 500
+    },
+    {
+      "name": "Sugar",
+      "category": "Baking",
+      "current_grams": 1000,
+      "max_grams": 1000
+    },
+    {
+      "name": "Tomato paste",
+      "category": "Canned & Jarred",
+      "current_grams": 200,
+      "max_grams": 200
+    },
+    {
+      "name": "Tomato sauce",
+      "category": "Canned & Jarred",
+      "current_grams": 425,
+      "max_grams": 425
+    },
+    {
+      "name": "Canned fava beans (Egyptian style)",
+      "category": "Canned & Jarred",
+      "current_grams": 400,
+      "max_grams": 400
+    },
+    {
+      "name": "Pickled ginger",
+      "category": "Canned & Jarred",
+      "current_grams": 150,
+      "max_grams": 150
+    },
+    {
+      "name": "Pickles",
+      "category": "Canned & Jarred",
+      "current_grams": 500,
+      "max_grams": 500
+    },
+    {
+      "name": "Dal moros",
+      "category": "Grains & Pasta",
+      "current_grams": 500,
+      "max_grams": 500
+    },
+    {
+      "name": "Indomie mi goreng",
+      "category": "Grains & Pasta",
+      "current_grams": 400,
+      "max_grams": 400
+    },
+    {
+      "name": "Shin ramyun",
+      "category": "Grains & Pasta",
+      "current_grams": 480,
+      "max_grams": 480
+    },
+    {
+      "name": "Whole wheat tortillas",
+      "category": "Grains & Pasta",
+      "current_grams": 500,
+      "max_grams": 500
+    },
+    {
+      "name": "Basmati rice",
+      "category": "Grains & Pasta",
+      "current_grams": 2000,
+      "max_grams": 2000
+    },
+    {
+      "name": "Lean ground beef",
+      "category": "Meat & Fish",
+      "current_grams": 900,
+      "max_grams": 900
+    },
+    {
+      "name": "Onions",
+      "category": "Produce",
+      "current_grams": 1000,
+      "max_grams": 1000
+    },
+    {
+      "name": "Oranges",
+      "category": "Produce",
+      "current_grams": 1000,
+      "max_grams": 1000
+    },
+    {
+      "name": "Oil spray",
+      "category": "Oils & Sauces",
+      "current_grams": 140,
+      "max_grams": 140
+    },
+    {
+      "name": "Lemon juice",
+      "category": "Oils & Sauces",
+      "current_grams": 200,
+      "max_grams": 200
+    },
+    {
+      "name": "Ketchup",
+      "category": "Oils & Sauces",
+      "current_grams": 500,
+      "max_grams": 500
+    },
+    {
+      "name": "Lime jalapeño sauce",
+      "category": "Oils & Sauces",
+      "current_grams": 250,
+      "max_grams": 250
+    },
+    {
+      "name": "Takis chips",
+      "category": "Snacks & Other",
+      "current_grams": 280,
+      "max_grams": 280
+    }
+  ]
+}
