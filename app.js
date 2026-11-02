@@ -134,21 +134,47 @@ function parseImport(text) {
   return { items, equipment: Array.isArray(data.equipment) ? data.equipment.map(String) : null, prefs: data.preferences && typeof data.preferences === 'object' ? data.preferences : null };
 }
 
+function applyImport(text, label) {
+  try {
+    const clean = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+    const imp = parseImport(clean);
+    if (!confirm(`Replace your current pantry (${state.items.length} items) with ${imp.items.length} items from ${label}?`)) return false;
+    state.items = imp.items;
+    if (imp.equipment) state.equipment = imp.equipment;
+    if (imp.prefs) state.prefs = { ...state.prefs, ...imp.prefs };
+    save(); render();
+    toast(`Imported ${imp.items.length} items`);
+    return true;
+  } catch (e) { alert(e.message); return false; }
+}
+
 function handleFile(file) {
   const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const imp = parseImport(String(reader.result));
-      if (!confirm(`Replace your current pantry (${state.items.length} items) with ${imp.items.length} items from "${file.name}"?`)) return;
-      state.items = imp.items;
-      if (imp.equipment) state.equipment = imp.equipment;
-      if (imp.prefs) state.prefs = { ...state.prefs, ...imp.prefs };
-      save(); render();
-      toast(`Imported ${imp.items.length} items`);
-    } catch (e) { alert(e.message); }
-  };
+  reader.onload = () => applyImport(String(reader.result), `"${file.name}"`);
   reader.onerror = () => alert('Could not read that file.');
   reader.readAsText(file);
+}
+
+function openPasteDialog() {
+  const dlg = $('#dlg');
+  dlg.innerHTML = `
+    <form method="dialog" id="pasteForm">
+      <h3>Paste pantry JSON</h3>
+      <p class="hint">Replaces your whole pantry.</p>
+      <textarea id="paste-text" class="preview" placeholder='{"pantry": [...]}' autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+      <div style="margin-top:14px">
+        <button class="btn" value="go">Import</button>
+        <button class="btn secondary" type="button" id="paste-cancel">Cancel</button>
+      </div>
+    </form>`;
+  dlg.querySelector('#paste-cancel').addEventListener('click', () => dlg.close());
+  dlg.querySelector('form').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const text = dlg.querySelector('#paste-text').value;
+    if (!text.trim()) return;
+    if (applyImport(text, 'the pasted text')) dlg.close();
+  });
+  dlg.showModal();
 }
 
 // ---------- item dialog ----------
@@ -262,6 +288,7 @@ function settingsView() {
       <h2>Pantry data</h2>
       <p class="hint">Stored only on this device. Back it up regularly.</p>
       <button class="btn secondary" id="upload">⬆️ Upload JSON (replaces pantry)</button>
+      <button class="btn secondary" id="paste">📥 Paste JSON (replaces pantry)</button>
       <button class="btn secondary" id="download">⬇️ Download pantry JSON</button>
       <button class="btn secondary" id="copyjson">📋 Copy pantry JSON only</button>
       <button class="btn danger" id="clear">Clear entire pantry</button>
@@ -312,6 +339,7 @@ function bind() {
       save();
     }));
     on('#upload', 'click', () => { $('#file').value = ''; $('#file').click(); });
+    on('#paste', 'click', openPasteDialog);
     on('#download', 'click', () => {
       const blob = new Blob([JSON.stringify(buildBackup(), null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
